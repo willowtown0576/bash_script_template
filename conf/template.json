@@ -1,0 +1,11 @@
+{
+  "production": {
+    "greet": "Hello, Production!"
+  },
+  "staging":{
+    "greet": "Hello, Staging!"
+  },
+  "develop": {
+    "greet": "Hello, Develop!"
+  }
+}
