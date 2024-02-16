@@ -96,9 +96,10 @@ if (( IS_VERBOSE == _TRUE_ )); then
   set -x
 fi
 
+# このmain関数に主処理を書く
 function main() {
   common::parse_json ".${MODE}.greet" "${_BASE_DIR_}/conf/template.json"
 }
 
-# Run
+# main関数実行
 main

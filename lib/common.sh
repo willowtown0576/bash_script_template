@@ -1,11 +1,13 @@
 #!/bin/bash
 #-*- coding: utf-8 -*-
 
+# 共通の定数を定義
+# common.shで定義される定数は、アンダーバーで囲むことによって判別できるようにする。
 readonly _BASE_DIR_="$(cd $(dirname $0)/.. && pwd)"
 readonly _SUCCESS_=0
 readonly _WARNING_=1
 readonly _ERROR_=2
-readonly _CRITICAL=4
+readonly _CRITICAL_=4
 readonly _TRUE_=0
 readonly _FALSE_=1
 
@@ -51,6 +53,7 @@ function common::parse_json() {
     exit ${_CRITICAL_}
   fi
 
+  # JSONファイルの存在確認
   if [[ ! -f "${_json}" ]]; then
     common::logging "${_json}が存在しません"
     exit ${_ERROR_}
