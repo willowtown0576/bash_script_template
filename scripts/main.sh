@@ -14,11 +14,11 @@ Usage:
   $(basename $0) [--production|--staging|--develop] [options] [-- args]
 
 Options:
-  --production
+  --production or -p
     本番環境モードで実行する
-  --staging
+  --staging or -s
     検証環境モードで実行する
-  --develop
+  --develop or -d
     開発環境モードで実行する
   --verbose, -v
     トレースログを出力する
@@ -49,15 +49,15 @@ IS_VERBOSE=${_FALSE_}
 
 while (( $# > 0 )); do
   case "$1" in
-    --production)
+    --production|-p)
       MODE="production"
       shift
       ;;
-    --staging)
+    --staging|-s)
       MODE="staging"
       shift
       ;;
-    --develop)
+    --develop|-d)
       MODE="develop"
       shift
       ;;
@@ -67,7 +67,7 @@ while (( $# > 0 )); do
       ;;
     --help|-h)
       usage
-      exit ${_WARNING_}
+      exit ${_SUCCESS_}
       ;;
     --)
       shift
@@ -98,8 +98,25 @@ fi
 
 # このmain関数に主処理を書く
 function main() {
-  common::parse_json ".${MODE}.greet" "${_BASE_DIR_}/conf/template.json"
+  # 引数ありの場合は以下のように取得する
+  # 最初の引数を代入
+  # local _arg1="$1"
+  # 第二引数を代入
+  # local _arg2="$2"
+  # 引数すべてを一つに変数に代入
+  # local _arg_all="$@"
+
+  # JSONファイルから各環境ごとの設定値を読み取る
+  common::jq_wrapper ".${MODE}.greet" "${_BASE_DIR_}/conf/template.json"
+
+  # 何らかの処理
+
+  # 戻り値返却
+  return ${_SUCCESS_}
 }
 
 # main関数実行
 main
+
+# main関数に引数を渡す場合は以下のようにする。
+# main ${ARGS[@]}
