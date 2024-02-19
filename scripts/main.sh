@@ -96,6 +96,9 @@ if (( IS_VERBOSE == _TRUE_ )); then
   set -x
 fi
 
+# 以降の標準出力、標準エラー出力をログファイルにリダイレクトする
+exec >> "${_BASE_DIR_}/log/$(date "+%Y%m%d%H%M")_$(basename "${0%.*}").log" 2>&1
+
 # このmain関数に主処理を書く
 function main() {
   # 引数ありの場合は以下のように取得する
