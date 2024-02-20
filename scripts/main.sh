@@ -8,10 +8,10 @@ source "$(dirname $0)/../lib/common.sh"
 function usage() {
   cat <<EOF
 Name:
-  $(basename $0) - シェルスクリプトテンプレート
+  ${_SCRIPT_NAME_} - シェルスクリプトテンプレート
 
 Usage:
-  $(basename $0) [--production|--staging|--develop] [options] [-- args]
+  ${_SCRIPT_NAME_} [--production|--staging|--develop] [options] [-- args]
 
 Options:
   --production or -p
@@ -85,7 +85,7 @@ while (( $# > 0 )); do
 done
 
 # MODEの確認
-if [[ -z "${MODE}" ]];then
+if [[ -z "${MODE}" ]]; then
   common::logging "必須オプション: [--production|--staging|--develop]"
   exit ${_ERROR_}
 fi
